@@ -67,7 +67,7 @@ def main(argv):
     # get header
     current_line = 0
     config_text = ""
-    with open(url) as infile:
+    with open(url, encoding='utf-8') as infile:
         for line in infile:
             if '[Term]' in line:
                 break
@@ -76,13 +76,13 @@ def main(argv):
 
     count_files = 0
     if n_files == -1:
-        n_files = 10
+        n_files = 10000
     while count_files < int(n_files):
         count_terms = 0
         file_name = output.split('.')[0] + '-' + str(count_files) + '.obo'
-        with open(file_name, 'a') as file_output:
+        with open(file_name, 'a', encoding='utf-8') as file_output:
             file_output.write(config_text)
-            with open(url) as infile:
+            with open(url, encoding='utf-8') as infile:
                 # jump to current line
                 for line in islice(infile, current_line, None):
                     if count_terms > int(n_terms) and '[Term]' in line:
